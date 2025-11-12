@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Оценка ответов с помощью AI</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🤖 Система оценки ответов</h1>
+      <p class="subtitle">Обработка CSV файлов с автоматической оценкой ответов на основе AI модели</p>
+    </header>
+
+    <div class="main-content">
+      <div class="card">
+        <h2>📤 Загрузите CSV файл</h2>
+        <div class="upload-area" id="uploadArea">
+          <input type="file" id="fileInput" accept=".csv" hidden />
+          <div class="upload-icon">📄</div>
+          <p class="upload-text">Нажмите для выбора файла или перетащите CSV файл сюда</p>
+          <p class="file-name" id="fileName"></p>
+        </div>
+
+        <div class="form-group" id="fileSettings" style="display: none;">
+          <h3>Настройки обработки</h3>
+          <div class="settings-grid">
+            <div class="setting-item">
+              <label for="maxRows">Количество строк для обработки:</label>
+              <input type="number" id="maxRows" min="1" placeholder="Все строки" />
+              <small>Оставьте пустым для обработки всех строк</small>
+            </div>
+            <div class="setting-item">
+              <p class="file-info" id="fileInfo"></p>
+            </div>
+          </div>
+        </div>
+
+        <button id="submitBtn" class="primary-btn" disabled>
+          <span class="btn-icon">🚀</span>
+          Обработать и оценить ответы
+        </button>
+      </div>
+
+      <div class="card" id="statusCard" style="display: none;">
+        <h2>📊 Статус обработки</h2>
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <p class="progress-text" id="progressText">Ожидание...</p>
+        </div>
+        <div id="statusMessage" class="status-message"></div>
+      </div>
+
+      <div class="card" id="resultCard" style="display: none;">
+        <h2>✅ Результат готов</h2>
+        <p class="result-info">Доступны два варианта выгрузки:</p>
+        <div class="actions" style="display:flex; gap:12px; flex-wrap:wrap;">
+          <button id="downloadFullBtn" class="download-btn">
+            <span class="btn-icon">⬇️</span>
+            Скачать полный CSV
+          </button>
+          <button id="downloadSimpleBtn" class="download-btn" disabled>
+            <span class="btn-icon">⬇️</span>
+            Скачать упрощенный CSV
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <div class="info-card">
+        <h3>ℹ️ Как это работает</h3>
+        <ul>
+          <li>Загрузите CSV файл с данными экзамена</li>
+          <li>Система автоматически очистит данные от HTML тегов</li>
+          <li>AI модель оценит каждый ответ согласно критериям</li>
+          <li>Оценки нормализуются по диапазонам вопросов (0-1 для вопросов 1,3; 0-2 для вопросов 2,4)</li>
+          <li>Скачайте результат в формате CSV с полными данными: Id экзамена, № вопроса, Текст вопроса, Картинка, Оценка модели, Транскрибация</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>📋 Формат CSV</h3>
+        <p>Файл должен содержать следующие колонки:</p>
+        <ul>
+          <li><code>Id экзамена</code></li>
+          <li><code>Id вопроса</code></li>
+          <li><code>№ вопроса</code> (1-4)</li>
+          <li><code>Текст вопроса</code> (может содержать HTML)</li>
+          <li><code>Картинка из вопроса</code> (опционально)</li>
+          <li><code>Оценка экзаменатора</code></li>
+          <li><code>Транскрибация ответа</code></li>
+          <li><code>Ссылка на оригинальный файл записи</code></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
