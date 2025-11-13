@@ -9,8 +9,21 @@
   .\venv\Scripts\activate  
   В Linux/macOS:  
   source venv/bin/activate  
+  Перейти в директорию Sigma_case_ex командой  cd .\Sigma_case_ex\
   Установить зависимости  
-  pip install -r requirements.txt(или см. в проекте название файла)  
+  pip install -r requirements.txt(или см. в проекте аналогичное название файла)
+  ### Примечание:  
+  При установке зависимостей может возникнуть переполнение и нагрузка на системный диск в папке temp, в таком случае можно использовать дополнительный выриант:
+  Выполнить в консоле IDE:
+  New-Item -ItemType Directory -Force -Path "D:\temp"  
+New-Item -ItemType Directory -Force -Path "D:\pip_cache"   
+New-Item -ItemType Directory -Force -Path "D:\pip_build"  
+
+$env:TMP = "D:\temp"  
+$env:TEMP = "D:\temp"   
+$env:PIP_BUILD_DIR = "D:\pip_build"  
+
+pip install --cache-dir D:\pip_cache -r requirements.txt
 *  перейти в корневую директорию клонированного репозитория и выполнить команду:  
    python -m uvicorn Sigma_case.app.main:app --reload
    Перейти в адресной строке браузера по адресу localhost:8000
