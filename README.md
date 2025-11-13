@@ -10,7 +10,7 @@
   В Linux/macOS:  
   source venv/bin/activate  
   Установить зависимости  
-  pip install -r requirements.txt  
+  pip install -r requirements.txt(или см. в проекте название файла)  
 *  перейти в корневую директорию клонированного репозитория и выполнить команду:  
    python -m uvicorn Sigma_case.app.main:app --reload
    Перейти в адресной строке браузера по адресу localhost:8000
